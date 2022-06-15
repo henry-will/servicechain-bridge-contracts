@@ -1,0 +1,3480 @@
+{
+  "contractName": "BridgeTransfer",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "fee",
+          "type": "uint256"
+        }
+      ],
+      "name": "ERC20FeeChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "feeReceiver",
+          "type": "address"
+        }
+      ],
+      "name": "FeeReceiverChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "requestTxHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "enum BridgeTransfer.TokenType",
+          "name": "tokenType",
+          "type": "uint8"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "tokenAddress",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "valueOrTokenId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint64",
+          "name": "handleNonce",
+          "type": "uint64"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint64",
+          "name": "lowerHandleNonce",
+          "type": "uint64"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "extraData",
+          "type": "bytes"
+        }
+      ],
+      "name": "HandleValueTransfer",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "fee",
+          "type": "uint256"
+        }
+      ],
+      "name": "KLAYFeeChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "enum BridgeTransfer.TokenType",
+          "name": "tokenType",
+          "type": "uint8"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "tokenAddress",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "valueOrTokenId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint64",
+          "name": "requestNonce",
+          "type": "uint64"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "fee",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "extraData",
+          "type": "bytes"
+        }
+      ],
+      "name": "RequestValueTransfer",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "enum BridgeTransfer.TokenType",
+          "name": "tokenType",
+          "type": "uint8"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "tokenAddress",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "valueOrTokenId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint64",
+          "name": "requestNonce",
+          "type": "uint64"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "fee",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "extraData",
+          "type": "bytes"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint8",
+          "name": "encodingVer",
+          "type": "uint8"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "encodedData",
+          "type": "bytes"
+        }
+      ],
+      "name": "RequestValueTransferEncoded",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "MAX_OPERATOR",
+      "outputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "name": "closedValueTransferVotes",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "configurationNonce",
+      "outputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_operator",
+          "type": "address"
+        }
+      ],
+      "name": "deregisterOperator",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "feeOfERC20",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "feeOfKLAY",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "feeReceiver",
+      "outputs": [
+        {
+          "internalType": "address payable",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getOperatorList",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "name": "handleNoncesToBlockNums",
+      "outputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "handledRequestTx",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "isRunning",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "lowerHandleNonce",
+      "outputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "modeMintBurn",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "operatorList",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "name": "operatorThresholds",
+      "outputs": [
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "operators",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "recoveryBlockNumber",
+      "outputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_operator",
+          "type": "address"
+        }
+      ],
+      "name": "registerOperator",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "requestNonce",
+      "outputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum BridgeOperator.VoteType",
+          "name": "_voteType",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "_threshold",
+          "type": "uint8"
+        }
+      ],
+      "name": "setOperatorThreshold",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "upperHandleNonce",
+      "outputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bool",
+          "name": "_status",
+          "type": "bool"
+        }
+      ],
+      "name": "start",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address payable",
+          "name": "_feeReceiver",
+          "type": "address"
+        }
+      ],
+      "name": "setFeeReceiver",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.14+commit.80d49f37\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"name\":\"ERC20FeeChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"feeReceiver\",\"type\":\"address\"}],\"name\":\"FeeReceiverChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"requestTxHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"enum BridgeTransfer.TokenType\",\"name\":\"tokenType\",\"type\":\"uint8\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"valueOrTokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"handleNonce\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"lowerHandleNonce\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"extraData\",\"type\":\"bytes\"}],\"name\":\"HandleValueTransfer\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"name\":\"KLAYFeeChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"enum BridgeTransfer.TokenType\",\"name\":\"tokenType\",\"type\":\"uint8\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"valueOrTokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"requestNonce\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"extraData\",\"type\":\"bytes\"}],\"name\":\"RequestValueTransfer\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"enum BridgeTransfer.TokenType\",\"name\":\"tokenType\",\"type\":\"uint8\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"valueOrTokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"requestNonce\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"extraData\",\"type\":\"bytes\"},{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"encodingVer\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"encodedData\",\"type\":\"bytes\"}],\"name\":\"RequestValueTransferEncoded\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"MAX_OPERATOR\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"name\":\"closedValueTransferVotes\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"configurationNonce\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_operator\",\"type\":\"address\"}],\"name\":\"deregisterOperator\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"feeOfERC20\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"feeOfKLAY\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"feeReceiver\",\"outputs\":[{\"internalType\":\"address payable\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getOperatorList\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"name\":\"handleNoncesToBlockNums\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"handledRequestTx\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isRunning\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"lowerHandleNonce\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"modeMintBurn\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"operatorList\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"name\":\"operatorThresholds\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"operators\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"recoveryBlockNumber\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_operator\",\"type\":\"address\"}],\"name\":\"registerOperator\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"requestNonce\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address payable\",\"name\":\"_feeReceiver\",\"type\":\"address\"}],\"name\":\"setFeeReceiver\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"enum BridgeOperator.VoteType\",\"name\":\"_voteType\",\"type\":\"uint8\"},{\"internalType\":\"uint8\",\"name\":\"_threshold\",\"type\":\"uint8\"}],\"name\":\"setOperatorThreshold\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"_status\",\"type\":\"bool\"}],\"name\":\"start\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"upperHandleNonce\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"events\":{\"HandleValueTransfer(bytes32,uint8,address,address,address,uint256,uint64,uint64,bytes)\":{\"params\":{\"extraData\":\"is additional data for specific purpose of a service provider.\",\"from\":\"is an address of the account who requested the value transfer.\",\"handleNonce\":\"is the order number of the handle value transfer.\",\"requestTxHash\":\"is a transaction hash of request value transfer.\",\"to\":\"is an address of the account who will received the value.\",\"tokenAddress\":\"Address of token contract the token belong to.\",\"tokenType\":\"is the type of tokens (KLAY/ERC20/ERC721).\",\"valueOrTokenId\":\"is the value of KLAY/ERC20 or token ID of ERC721.\"}},\"RequestValueTransfer(uint8,address,address,address,uint256,uint64,uint256,bytes)\":{\"params\":{\"extraData\":\"is additional data for specific purpose of a service provider.\",\"fee\":\"is fee of value transfer.\",\"from\":\"is the requester of the request value transfer event.\",\"requestNonce\":\"is the order number of the request value transfer.\",\"to\":\"is the receiver of the value.\",\"tokenAddress\":\"Address of token contract the token belong to.\",\"tokenType\":\"is the type of tokens (KLAY/ERC20/ERC721).\",\"valueOrTokenId\":\"is the value of KLAY/ERC20 or token ID of ERC721.\"}},\"RequestValueTransferEncoded(uint8,address,address,address,uint256,uint64,uint256,bytes,uint8,bytes)\":{\"params\":{\"encodedData\":\"is a packed set of values.\",\"encodingVer\":\"indicates encodedData version.\",\"extraData\":\"is additional data for specific purpose of a service provider.\",\"fee\":\"is fee of value transfer.\",\"from\":\"is the requester of the request value transfer event.\",\"requestNonce\":\"is the order number of the request value transfer.\",\"to\":\"is the receiver of the value.\",\"tokenAddress\":\"Address of token contract the token belong to.\",\"tokenType\":\"is the type of tokens (KLAY/ERC20/ERC721).\",\"valueOrTokenId\":\"is the value of KLAY/ERC20 or token ID of ERC721.\"}}},\"kind\":\"dev\",\"methods\":{\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"}},\"version\":1},\"userdoc\":{\"events\":{\"HandleValueTransfer(bytes32,uint8,address,address,address,uint256,uint64,uint64,bytes)\":{\"notice\":\"Event to log the handle value transfer from the Bridge.\"},\"RequestValueTransfer(uint8,address,address,address,uint256,uint64,uint256,bytes)\":{\"notice\":\"Event to log the request value transfer from the Bridge.\"},\"RequestValueTransferEncoded(uint8,address,address,address,uint256,uint64,uint256,bytes,uint8,bytes)\":{\"notice\":\"Event to log the request value transfer from the Bridge.\"}},\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/sc/bridge/BridgeTransfer.sol\":\"BridgeTransfer\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@klaytn/contracts/access/Ownable.sol\":{\"keccak256\":\"0x24e0364e503a9bbde94c715d26573a76f14cd2a202d45f96f52134ab806b67b9\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e12cbaa7378fd9b62280e4e1d164bedcb4399ce238f5f98fc0eefb7e50577981\",\"dweb:/ipfs/QmXRoFGUgfsaRkoPT5bxNMtSayKTQ8GZATLPXf69HcRA51\"]},\"@klaytn/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x9750c6b834f7b43000631af5cc30001c5f547b3ceb3635488f140f60e897ea6b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5a7d5b1ef5d8d5889ad2ed89d8619c09383b80b72ab226e0fe7bde1636481e34\",\"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr\"]},\"@klaytn/contracts/utils/Context.sol\":{\"keccak256\":\"0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92\",\"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3\"]},\"project:/contracts/sc/bridge/BridgeFee.sol\":{\"keccak256\":\"0x95553a37885a020e43bd91004e692dabdbeab4d8fc24adb50957d4d62c56c282\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9565b0940a5b5d7539e5a0402590b9dce37a463e5a571094b3ee4eb1301cd806\",\"dweb:/ipfs/QmRNbqAoGunFp4rs3sW3VUgKFCFjwyS3gnt1auCthyGVtX\"]},\"project:/contracts/sc/bridge/BridgeHandledRequests.sol\":{\"keccak256\":\"0x45fcca00053f2902d5d8158e2d4f061ad129837772b322b3fe4433e171578512\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5d37d3c6e563332fe394a77b68db44b737f31ff466a25809f694011e19a184b8\",\"dweb:/ipfs/QmUnqCGj9PQjWhfpKfsRU3YbBzC7yhV6oq9h9nmUgRzmHC\"]},\"project:/contracts/sc/bridge/BridgeOperator.sol\":{\"keccak256\":\"0xfb74760b2130aec69e62a6fb65d9cbd303a7f43408cde4fea3adfa5e951be5e9\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6b78127916fa7de3ad2881920ad3ef27390f21b0fff884fa82126d9270467962\",\"dweb:/ipfs/QmQBwtJwh1m7ExkKY8fJ7jY7NxQf6hhFaG5kURC6nD8YSe\"]},\"project:/contracts/sc/bridge/BridgeTokens.sol\":{\"keccak256\":\"0x4ccf50eff2eca13ae36ce020442c274b9b39d0f7429ad3b6092ed1746f5f2629\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f85241a5c04c57ede4f5d8fca2c60b5c5b378e91fe21d2e096959245d263a9bd\",\"dweb:/ipfs/QmaiCQmD2vZiv4xEmidGwepnT5j2zYDXQ4yzBn6f8Rg62x\"]},\"project:/contracts/sc/bridge/BridgeTransfer.sol\":{\"keccak256\":\"0xa84d3acb24f9cb2de586535a3d5f2ab18f7393afb5e29d2f33c967713c60b2ad\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8101f97a9dd14dc6cc56e9f562a7e804fad2a215c6c1020ad424e9b3336fc322\",\"dweb:/ipfs/QmNcuCnGf84g5wwYa6baaJXdoER3tRFHwpE2Ept9NnKwxD\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\n\n// Copyright 2019 The klaytn Authors\n// This file is part of the klaytn library.\n//\n// The klaytn library is free software: you can redistribute it and/or modify\n// it under the terms of the GNU Lesser General Public License as published by\n// the Free Software Foundation, either version 3 of the License, or\n// (at your option) any later version.\n//\n// The klaytn library is distributed in the hope that it will be useful,\n// but WITHOUT ANY WARRANTY; without even the implied warranty of\n// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the\n// GNU Lesser General Public License for more details.\n//\n// You should have received a copy of the GNU Lesser General Public License\n// along with the klaytn library. If not, see <http://www.gnu.org/licenses/>.\n\npragma solidity ^0.8.0;\n\nimport \"./BridgeHandledRequests.sol\";\nimport \"./BridgeFee.sol\";\nimport \"./BridgeOperator.sol\";\nimport \"./BridgeTokens.sol\";\n\nabstract contract BridgeTransfer is BridgeHandledRequests, BridgeFee, BridgeOperator {\n    bool public modeMintBurn = false;\n    bool public isRunning = true;\n\n    uint64 public requestNonce; // the number of value transfer request that this contract received.\n    uint64 public lowerHandleNonce; // a minimum nonce of a value transfer request that will be handled.\n    uint64 public upperHandleNonce; // a maximum nonce of the counterpart bridge's value transfer request that is handled.\n    uint64 public recoveryBlockNumber = 1; // the block number that recovery start to filter log from.\n    mapping(uint64 => uint64) public handleNoncesToBlockNums;  // <request nonce> => <request blockNum>\n\n    enum TokenType {\n        KLAY,\n        ERC20,\n        ERC721\n    }\n\n    constructor(bool _modeMintBurn) BridgeFee(payable(address(0))) {\n        modeMintBurn = _modeMintBurn;\n    }\n\n    // start can allow or disallow the value transfer request.\n    function start(bool _status)\n        external\n        onlyOwner\n    {\n        isRunning = _status;\n    }\n\n    /**\n     * Event to log the request value transfer from the Bridge.\n     * @param tokenType is the type of tokens (KLAY/ERC20/ERC721).\n     * @param from is the requester of the request value transfer event.\n     * @param to is the receiver of the value.\n     * @param tokenAddress Address of token contract the token belong to.\n     * @param valueOrTokenId is the value of KLAY/ERC20 or token ID of ERC721.\n     * @param requestNonce is the order number of the request value transfer.\n     * @param fee is fee of value transfer.\n     * @param extraData is additional data for specific purpose of a service provider.\n     */\n    event RequestValueTransfer(\n        TokenType tokenType,\n        address indexed from,\n        address indexed to,\n        address indexed tokenAddress,\n        uint256 valueOrTokenId,\n        uint64 requestNonce,\n        uint256 fee,\n        bytes extraData\n    );\n\n    /**\n     * Event to log the request value transfer from the Bridge.\n     * @param tokenType is the type of tokens (KLAY/ERC20/ERC721).\n     * @param from is the requester of the request value transfer event.\n     * @param to is the receiver of the value.\n     * @param tokenAddress Address of token contract the token belong to.\n     * @param valueOrTokenId is the value of KLAY/ERC20 or token ID of ERC721.\n     * @param requestNonce is the order number of the request value transfer.\n     * @param fee is fee of value transfer.\n     * @param extraData is additional data for specific purpose of a service provider.\n     * @param encodingVer indicates encodedData version.\n     * @param encodedData is a packed set of values.\n     */\n    event RequestValueTransferEncoded(\n        TokenType tokenType,\n        address indexed from,\n        address indexed to,\n        address indexed tokenAddress,\n        uint256 valueOrTokenId,\n        uint64 requestNonce,\n        uint256 fee,\n        bytes extraData,\n        uint8 encodingVer,\n        bytes encodedData\n    );\n\n    /**\n     * Event to log the handle value transfer from the Bridge.\n     * @param requestTxHash is a transaction hash of request value transfer.\n     * @param tokenType is the type of tokens (KLAY/ERC20/ERC721).\n     * @param from is an address of the account who requested the value transfer.\n     * @param to is an address of the account who will received the value.\n     * @param tokenAddress Address of token contract the token belong to.\n     * @param valueOrTokenId is the value of KLAY/ERC20 or token ID of ERC721.\n     * @param handleNonce is the order number of the handle value transfer.\n     * @param extraData is additional data for specific purpose of a service provider.\n     */\n    event HandleValueTransfer(\n        bytes32 requestTxHash,\n        TokenType tokenType,\n        address indexed from,\n        address indexed to,\n        address indexed tokenAddress,\n        uint256 valueOrTokenId,\n        uint64 handleNonce,\n        uint64 lowerHandleNonce,\n        bytes extraData\n    );\n\n    // _updateHandleNonce increases lower and upper handle nonce after the _requestedNonce is handled.\n    function _updateHandleNonce(uint64 _requestedNonce) internal {\n        if (_requestedNonce > upperHandleNonce) {\n            upperHandleNonce = _requestedNonce;\n        }\n\n        uint64 limit = lowerHandleNonce + 200;\n        if (limit > upperHandleNonce) {\n            limit = upperHandleNonce;\n        }\n\n        uint64 i;\n        for (i = lowerHandleNonce; i <= limit && handleNoncesToBlockNums[i] > 0; i++) {\n            recoveryBlockNumber = handleNoncesToBlockNums[i];\n            delete handleNoncesToBlockNums[i];\n            delete closedValueTransferVotes[i];\n        }\n        lowerHandleNonce = i;\n    }\n\n    function _lowerHandleNonceCheck(uint64 _requestedNonce) internal view {\n        require(lowerHandleNonce <= _requestedNonce, \"removed vote\");\n    }\n\n    // setFeeReceivers sets fee receiver.\n    function setFeeReceiver(address payable _feeReceiver)\n        external\n        onlyOwner\n    {\n        _setFeeReceiver(_feeReceiver);\n    }\n}\n",
+  "sourcePath": "/Users/henry/git/servicechain-bridge-contracts/contracts/sc/bridge/BridgeTransfer.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/sc/bridge/BridgeTransfer.sol",
+    "exportedSymbols": {
+      "BridgeFee": [
+        3652
+      ],
+      "BridgeHandledRequests": [
+        3671
+      ],
+      "BridgeOperator": [
+        4182
+      ],
+      "BridgeTokens": [
+        4445
+      ],
+      "BridgeTransfer": [
+        4674
+      ],
+      "Context": [
+        3101
+      ],
+      "IERC20": [
+        1161
+      ],
+      "Ownable": [
+        497
+      ]
+    },
+    "id": 4675,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 4447,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "801:23:26"
+      },
+      {
+        "absolutePath": "project:/contracts/sc/bridge/BridgeHandledRequests.sol",
+        "file": "./BridgeHandledRequests.sol",
+        "id": 4448,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 4675,
+        "sourceUnit": 3672,
+        "src": "826:37:26",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "project:/contracts/sc/bridge/BridgeFee.sol",
+        "file": "./BridgeFee.sol",
+        "id": 4449,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 4675,
+        "sourceUnit": 3653,
+        "src": "864:25:26",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "project:/contracts/sc/bridge/BridgeOperator.sol",
+        "file": "./BridgeOperator.sol",
+        "id": 4450,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 4675,
+        "sourceUnit": 4183,
+        "src": "890:30:26",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "project:/contracts/sc/bridge/BridgeTokens.sol",
+        "file": "./BridgeTokens.sol",
+        "id": 4451,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 4675,
+        "sourceUnit": 4446,
+        "src": "921:28:26",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": true,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 4452,
+              "name": "BridgeHandledRequests",
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 3671,
+              "src": "987:21:26"
+            },
+            "id": 4453,
+            "nodeType": "InheritanceSpecifier",
+            "src": "987:21:26"
+          },
+          {
+            "baseName": {
+              "id": 4454,
+              "name": "BridgeFee",
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 3652,
+              "src": "1010:9:26"
+            },
+            "id": 4455,
+            "nodeType": "InheritanceSpecifier",
+            "src": "1010:9:26"
+          },
+          {
+            "baseName": {
+              "id": 4456,
+              "name": "BridgeOperator",
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 4182,
+              "src": "1021:14:26"
+            },
+            "id": 4457,
+            "nodeType": "InheritanceSpecifier",
+            "src": "1021:14:26"
+          }
+        ],
+        "canonicalName": "BridgeTransfer",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 4674,
+        "linearizedBaseContracts": [
+          4674,
+          4182,
+          497,
+          3101,
+          3652,
+          3671
+        ],
+        "name": "BridgeTransfer",
+        "nameLocation": "969:14:26",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "functionSelector": "6e176ec2",
+            "id": 4460,
+            "mutability": "mutable",
+            "name": "modeMintBurn",
+            "nameLocation": "1054:12:26",
+            "nodeType": "VariableDeclaration",
+            "scope": 4674,
+            "src": "1042:32:26",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            },
+            "typeName": {
+              "id": 4458,
+              "name": "bool",
+              "nodeType": "ElementaryTypeName",
+              "src": "1042:4:26",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              }
+            },
+            "value": {
+              "hexValue": "66616c7365",
+              "id": 4459,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "bool",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "1069:5:26",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              },
+              "value": "false"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "2014e5d1",
+            "id": 4463,
+            "mutability": "mutable",
+            "name": "isRunning",
+            "nameLocation": "1092:9:26",
+            "nodeType": "VariableDeclaration",
+            "scope": 4674,
+            "src": "1080:28:26",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            },
+            "typeName": {
+              "id": 4461,
+              "name": "bool",
+              "nodeType": "ElementaryTypeName",
+              "src": "1080:4:26",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              }
+            },
+            "value": {
+              "hexValue": "74727565",
+              "id": 4462,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "bool",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "1104:4:26",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              },
+              "value": "true"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "7c1a0302",
+            "id": 4465,
+            "mutability": "mutable",
+            "name": "requestNonce",
+            "nameLocation": "1129:12:26",
+            "nodeType": "VariableDeclaration",
+            "scope": 4674,
+            "src": "1115:26:26",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint64",
+              "typeString": "uint64"
+            },
+            "typeName": {
+              "id": 4464,
+              "name": "uint64",
+              "nodeType": "ElementaryTypeName",
+              "src": "1115:6:26",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint64",
+                "typeString": "uint64"
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "4b40b826",
+            "id": 4467,
+            "mutability": "mutable",
+            "name": "lowerHandleNonce",
+            "nameLocation": "1230:16:26",
+            "nodeType": "VariableDeclaration",
+            "scope": 4674,
+            "src": "1216:30:26",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint64",
+              "typeString": "uint64"
+            },
+            "typeName": {
+              "id": 4466,
+              "name": "uint64",
+              "nodeType": "ElementaryTypeName",
+              "src": "1216:6:26",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint64",
+                "typeString": "uint64"
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "54edad72",
+            "id": 4469,
+            "mutability": "mutable",
+            "name": "upperHandleNonce",
+            "nameLocation": "1335:16:26",
+            "nodeType": "VariableDeclaration",
+            "scope": 4674,
+            "src": "1321:30:26",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint64",
+              "typeString": "uint64"
+            },
+            "typeName": {
+              "id": 4468,
+              "name": "uint64",
+              "nodeType": "ElementaryTypeName",
+              "src": "1321:6:26",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint64",
+                "typeString": "uint64"
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "989ba0d3",
+            "id": 4472,
+            "mutability": "mutable",
+            "name": "recoveryBlockNumber",
+            "nameLocation": "1458:19:26",
+            "nodeType": "VariableDeclaration",
+            "scope": 4674,
+            "src": "1444:37:26",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint64",
+              "typeString": "uint64"
+            },
+            "typeName": {
+              "id": 4470,
+              "name": "uint64",
+              "nodeType": "ElementaryTypeName",
+              "src": "1444:6:26",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint64",
+                "typeString": "uint64"
+              }
+            },
+            "value": {
+              "hexValue": "31",
+              "id": 4471,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "1480:1:26",
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_1_by_1",
+                "typeString": "int_const 1"
+              },
+              "value": "1"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "functionSelector": "13a6738a",
+            "id": 4476,
+            "mutability": "mutable",
+            "name": "handleNoncesToBlockNums",
+            "nameLocation": "1580:23:26",
+            "nodeType": "VariableDeclaration",
+            "scope": 4674,
+            "src": "1547:56:26",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint64_$_t_uint64_$",
+              "typeString": "mapping(uint64 => uint64)"
+            },
+            "typeName": {
+              "id": 4475,
+              "keyType": {
+                "id": 4473,
+                "name": "uint64",
+                "nodeType": "ElementaryTypeName",
+                "src": "1555:6:26",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint64",
+                  "typeString": "uint64"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "1547:25:26",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint64_$_t_uint64_$",
+                "typeString": "mapping(uint64 => uint64)"
+              },
+              "valueType": {
+                "id": 4474,
+                "name": "uint64",
+                "nodeType": "ElementaryTypeName",
+                "src": "1565:6:26",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint64",
+                  "typeString": "uint64"
+                }
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "BridgeTransfer.TokenType",
+            "id": 4480,
+            "members": [
+              {
+                "id": 4477,
+                "name": "KLAY",
+                "nameLocation": "1677:4:26",
+                "nodeType": "EnumValue",
+                "src": "1677:4:26"
+              },
+              {
+                "id": 4478,
+                "name": "ERC20",
+                "nameLocation": "1691:5:26",
+                "nodeType": "EnumValue",
+                "src": "1691:5:26"
+              },
+              {
+                "id": 4479,
+                "name": "ERC721",
+                "nameLocation": "1706:6:26",
+                "nodeType": "EnumValue",
+                "src": "1706:6:26"
+              }
+            ],
+            "name": "TokenType",
+            "nameLocation": "1657:9:26",
+            "nodeType": "EnumDefinition",
+            "src": "1652:66:26"
+          },
+          {
+            "body": {
+              "id": 4498,
+              "nodeType": "Block",
+              "src": "1787:45:26",
+              "statements": [
+                {
+                  "expression": {
+                    "id": 4496,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 4494,
+                      "name": "modeMintBurn",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4460,
+                      "src": "1797:12:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "id": 4495,
+                      "name": "_modeMintBurn",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4482,
+                      "src": "1812:13:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "src": "1797:28:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 4497,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1797:28:26"
+                }
+              ]
+            },
+            "id": 4499,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "arguments": [
+                      {
+                        "arguments": [
+                          {
+                            "hexValue": "30",
+                            "id": 4489,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "1782:1:26",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_rational_0_by_1",
+                              "typeString": "int_const 0"
+                            },
+                            "value": "0"
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_rational_0_by_1",
+                              "typeString": "int_const 0"
+                            }
+                          ],
+                          "id": 4488,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "nodeType": "ElementaryTypeNameExpression",
+                          "src": "1774:7:26",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_address_$",
+                            "typeString": "type(address)"
+                          },
+                          "typeName": {
+                            "id": 4487,
+                            "name": "address",
+                            "nodeType": "ElementaryTypeName",
+                            "src": "1774:7:26",
+                            "typeDescriptions": {}
+                          }
+                        },
+                        "id": 4490,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1774:10:26",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 4486,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "nodeType": "ElementaryTypeNameExpression",
+                      "src": "1766:8:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_address_payable_$",
+                        "typeString": "type(address payable)"
+                      },
+                      "typeName": {
+                        "id": 4485,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1766:8:26",
+                        "stateMutability": "payable",
+                        "typeDescriptions": {}
+                      }
+                    },
+                    "id": 4491,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1766:19:26",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  }
+                ],
+                "id": 4492,
+                "kind": "baseConstructorSpecifier",
+                "modifierName": {
+                  "id": 4484,
+                  "name": "BridgeFee",
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 3652,
+                  "src": "1756:9:26"
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1756:30:26"
+              }
+            ],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4483,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4482,
+                  "mutability": "mutable",
+                  "name": "_modeMintBurn",
+                  "nameLocation": "1741:13:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4499,
+                  "src": "1736:18:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 4481,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1736:4:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1735:20:26"
+            },
+            "returnParameters": {
+              "id": 4493,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1787:0:26"
+            },
+            "scope": 4674,
+            "src": "1724:108:26",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 4510,
+              "nodeType": "Block",
+              "src": "1969:36:26",
+              "statements": [
+                {
+                  "expression": {
+                    "id": 4508,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 4506,
+                      "name": "isRunning",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4463,
+                      "src": "1979:9:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "id": 4507,
+                      "name": "_status",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4501,
+                      "src": "1991:7:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "src": "1979:19:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 4509,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1979:19:26"
+                }
+              ]
+            },
+            "functionSelector": "c877cf37",
+            "id": 4511,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "id": 4504,
+                "kind": "modifierInvocation",
+                "modifierName": {
+                  "id": 4503,
+                  "name": "onlyOwner",
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 439,
+                  "src": "1955:9:26"
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1955:9:26"
+              }
+            ],
+            "name": "start",
+            "nameLocation": "1910:5:26",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4502,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4501,
+                  "mutability": "mutable",
+                  "name": "_status",
+                  "nameLocation": "1921:7:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4511,
+                  "src": "1916:12:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 4500,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1916:4:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1915:14:26"
+            },
+            "returnParameters": {
+              "id": 4505,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1969:0:26"
+            },
+            "scope": 4674,
+            "src": "1901:104:26",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "anonymous": false,
+            "documentation": {
+              "id": 4512,
+              "nodeType": "StructuredDocumentation",
+              "src": "2011:624:26",
+              "text": " Event to log the request value transfer from the Bridge.\n @param tokenType is the type of tokens (KLAY/ERC20/ERC721).\n @param from is the requester of the request value transfer event.\n @param to is the receiver of the value.\n @param tokenAddress Address of token contract the token belong to.\n @param valueOrTokenId is the value of KLAY/ERC20 or token ID of ERC721.\n @param requestNonce is the order number of the request value transfer.\n @param fee is fee of value transfer.\n @param extraData is additional data for specific purpose of a service provider."
+            },
+            "eventSelector": "eff76c36e53fa5ff52f27acc8a34d5047a8246abb07b77b12f1309f71e337f09",
+            "id": 4531,
+            "name": "RequestValueTransfer",
+            "nameLocation": "2646:20:26",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 4530,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4515,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "tokenType",
+                  "nameLocation": "2686:9:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4531,
+                  "src": "2676:19:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_TokenType_$4480",
+                    "typeString": "enum BridgeTransfer.TokenType"
+                  },
+                  "typeName": {
+                    "id": 4514,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 4513,
+                      "name": "TokenType",
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 4480,
+                      "src": "2676:9:26"
+                    },
+                    "referencedDeclaration": 4480,
+                    "src": "2676:9:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_TokenType_$4480",
+                      "typeString": "enum BridgeTransfer.TokenType"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4517,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "from",
+                  "nameLocation": "2721:4:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4531,
+                  "src": "2705:20:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4516,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2705:7:26",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4519,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "to",
+                  "nameLocation": "2751:2:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4531,
+                  "src": "2735:18:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4518,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2735:7:26",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4521,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "tokenAddress",
+                  "nameLocation": "2779:12:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4531,
+                  "src": "2763:28:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4520,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2763:7:26",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4523,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "valueOrTokenId",
+                  "nameLocation": "2809:14:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4531,
+                  "src": "2801:22:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 4522,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2801:7:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4525,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "requestNonce",
+                  "nameLocation": "2840:12:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4531,
+                  "src": "2833:19:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 4524,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2833:6:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4527,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "fee",
+                  "nameLocation": "2870:3:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4531,
+                  "src": "2862:11:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 4526,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2862:7:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4529,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "extraData",
+                  "nameLocation": "2889:9:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4531,
+                  "src": "2883:15:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 4528,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2883:5:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2666:238:26"
+            },
+            "src": "2640:265:26"
+          },
+          {
+            "anonymous": false,
+            "documentation": {
+              "id": 4532,
+              "nodeType": "StructuredDocumentation",
+              "src": "2911:734:26",
+              "text": " Event to log the request value transfer from the Bridge.\n @param tokenType is the type of tokens (KLAY/ERC20/ERC721).\n @param from is the requester of the request value transfer event.\n @param to is the receiver of the value.\n @param tokenAddress Address of token contract the token belong to.\n @param valueOrTokenId is the value of KLAY/ERC20 or token ID of ERC721.\n @param requestNonce is the order number of the request value transfer.\n @param fee is fee of value transfer.\n @param extraData is additional data for specific purpose of a service provider.\n @param encodingVer indicates encodedData version.\n @param encodedData is a packed set of values."
+            },
+            "eventSelector": "17d76053ca34a4dd8c402fe6498deb797fac89bf7ed02f3f5161aa9368cc8c1f",
+            "id": 4555,
+            "name": "RequestValueTransferEncoded",
+            "nameLocation": "3656:27:26",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 4554,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4535,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "tokenType",
+                  "nameLocation": "3703:9:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4555,
+                  "src": "3693:19:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_TokenType_$4480",
+                    "typeString": "enum BridgeTransfer.TokenType"
+                  },
+                  "typeName": {
+                    "id": 4534,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 4533,
+                      "name": "TokenType",
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 4480,
+                      "src": "3693:9:26"
+                    },
+                    "referencedDeclaration": 4480,
+                    "src": "3693:9:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_TokenType_$4480",
+                      "typeString": "enum BridgeTransfer.TokenType"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4537,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "from",
+                  "nameLocation": "3738:4:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4555,
+                  "src": "3722:20:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4536,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3722:7:26",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4539,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "to",
+                  "nameLocation": "3768:2:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4555,
+                  "src": "3752:18:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4538,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3752:7:26",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4541,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "tokenAddress",
+                  "nameLocation": "3796:12:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4555,
+                  "src": "3780:28:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4540,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3780:7:26",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4543,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "valueOrTokenId",
+                  "nameLocation": "3826:14:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4555,
+                  "src": "3818:22:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 4542,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3818:7:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4545,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "requestNonce",
+                  "nameLocation": "3857:12:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4555,
+                  "src": "3850:19:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 4544,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3850:6:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4547,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "fee",
+                  "nameLocation": "3887:3:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4555,
+                  "src": "3879:11:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 4546,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3879:7:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4549,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "extraData",
+                  "nameLocation": "3906:9:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4555,
+                  "src": "3900:15:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 4548,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3900:5:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4551,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "encodingVer",
+                  "nameLocation": "3931:11:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4555,
+                  "src": "3925:17:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint8",
+                    "typeString": "uint8"
+                  },
+                  "typeName": {
+                    "id": 4550,
+                    "name": "uint8",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3925:5:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint8",
+                      "typeString": "uint8"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4553,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "encodedData",
+                  "nameLocation": "3958:11:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4555,
+                  "src": "3952:17:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 4552,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3952:5:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3683:292:26"
+            },
+            "src": "3650:326:26"
+          },
+          {
+            "anonymous": false,
+            "documentation": {
+              "id": 4556,
+              "nodeType": "StructuredDocumentation",
+              "src": "3982:691:26",
+              "text": " Event to log the handle value transfer from the Bridge.\n @param requestTxHash is a transaction hash of request value transfer.\n @param tokenType is the type of tokens (KLAY/ERC20/ERC721).\n @param from is an address of the account who requested the value transfer.\n @param to is an address of the account who will received the value.\n @param tokenAddress Address of token contract the token belong to.\n @param valueOrTokenId is the value of KLAY/ERC20 or token ID of ERC721.\n @param handleNonce is the order number of the handle value transfer.\n @param extraData is additional data for specific purpose of a service provider."
+            },
+            "eventSelector": "12b02f226d965a2881e0e8ffed6c421803a22d57ad91f9ef996fe0748ea10175",
+            "id": 4577,
+            "name": "HandleValueTransfer",
+            "nameLocation": "4684:19:26",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 4576,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4558,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "requestTxHash",
+                  "nameLocation": "4721:13:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4577,
+                  "src": "4713:21:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 4557,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4713:7:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4561,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "tokenType",
+                  "nameLocation": "4754:9:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4577,
+                  "src": "4744:19:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_TokenType_$4480",
+                    "typeString": "enum BridgeTransfer.TokenType"
+                  },
+                  "typeName": {
+                    "id": 4560,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 4559,
+                      "name": "TokenType",
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 4480,
+                      "src": "4744:9:26"
+                    },
+                    "referencedDeclaration": 4480,
+                    "src": "4744:9:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_TokenType_$4480",
+                      "typeString": "enum BridgeTransfer.TokenType"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4563,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "from",
+                  "nameLocation": "4789:4:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4577,
+                  "src": "4773:20:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4562,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4773:7:26",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4565,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "to",
+                  "nameLocation": "4819:2:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4577,
+                  "src": "4803:18:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4564,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4803:7:26",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4567,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "tokenAddress",
+                  "nameLocation": "4847:12:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4577,
+                  "src": "4831:28:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4566,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4831:7:26",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4569,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "valueOrTokenId",
+                  "nameLocation": "4877:14:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4577,
+                  "src": "4869:22:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 4568,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4869:7:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4571,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "handleNonce",
+                  "nameLocation": "4908:11:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4577,
+                  "src": "4901:18:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 4570,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4901:6:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4573,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "lowerHandleNonce",
+                  "nameLocation": "4936:16:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4577,
+                  "src": "4929:23:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 4572,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4929:6:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4575,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "extraData",
+                  "nameLocation": "4968:9:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4577,
+                  "src": "4962:15:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 4574,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4962:5:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4703:280:26"
+            },
+            "src": "4678:306:26"
+          },
+          {
+            "body": {
+              "id": 4647,
+              "nodeType": "Block",
+              "src": "5154:555:26",
+              "statements": [
+                {
+                  "condition": {
+                    "commonType": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    },
+                    "id": 4584,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "id": 4582,
+                      "name": "_requestedNonce",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4579,
+                      "src": "5168:15:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": ">",
+                    "rightExpression": {
+                      "id": 4583,
+                      "name": "upperHandleNonce",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4469,
+                      "src": "5186:16:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      }
+                    },
+                    "src": "5168:34:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 4590,
+                  "nodeType": "IfStatement",
+                  "src": "5164:99:26",
+                  "trueBody": {
+                    "id": 4589,
+                    "nodeType": "Block",
+                    "src": "5204:59:26",
+                    "statements": [
+                      {
+                        "expression": {
+                          "id": 4587,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftHandSide": {
+                            "id": 4585,
+                            "name": "upperHandleNonce",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 4469,
+                            "src": "5218:16:26",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint64",
+                              "typeString": "uint64"
+                            }
+                          },
+                          "nodeType": "Assignment",
+                          "operator": "=",
+                          "rightHandSide": {
+                            "id": 4586,
+                            "name": "_requestedNonce",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 4579,
+                            "src": "5237:15:26",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint64",
+                              "typeString": "uint64"
+                            }
+                          },
+                          "src": "5218:34:26",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint64",
+                            "typeString": "uint64"
+                          }
+                        },
+                        "id": 4588,
+                        "nodeType": "ExpressionStatement",
+                        "src": "5218:34:26"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "assignments": [
+                    4592
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 4592,
+                      "mutability": "mutable",
+                      "name": "limit",
+                      "nameLocation": "5280:5:26",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 4647,
+                      "src": "5273:12:26",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      },
+                      "typeName": {
+                        "id": 4591,
+                        "name": "uint64",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "5273:6:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint64",
+                          "typeString": "uint64"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 4596,
+                  "initialValue": {
+                    "commonType": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    },
+                    "id": 4595,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "id": 4593,
+                      "name": "lowerHandleNonce",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4467,
+                      "src": "5288:16:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "+",
+                    "rightExpression": {
+                      "hexValue": "323030",
+                      "id": 4594,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "5307:3:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_200_by_1",
+                        "typeString": "int_const 200"
+                      },
+                      "value": "200"
+                    },
+                    "src": "5288:22:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "5273:37:26"
+                },
+                {
+                  "condition": {
+                    "commonType": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    },
+                    "id": 4599,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "id": 4597,
+                      "name": "limit",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4592,
+                      "src": "5324:5:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": ">",
+                    "rightExpression": {
+                      "id": 4598,
+                      "name": "upperHandleNonce",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4469,
+                      "src": "5332:16:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      }
+                    },
+                    "src": "5324:24:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 4605,
+                  "nodeType": "IfStatement",
+                  "src": "5320:79:26",
+                  "trueBody": {
+                    "id": 4604,
+                    "nodeType": "Block",
+                    "src": "5350:49:26",
+                    "statements": [
+                      {
+                        "expression": {
+                          "id": 4602,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftHandSide": {
+                            "id": 4600,
+                            "name": "limit",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 4592,
+                            "src": "5364:5:26",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint64",
+                              "typeString": "uint64"
+                            }
+                          },
+                          "nodeType": "Assignment",
+                          "operator": "=",
+                          "rightHandSide": {
+                            "id": 4601,
+                            "name": "upperHandleNonce",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 4469,
+                            "src": "5372:16:26",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint64",
+                              "typeString": "uint64"
+                            }
+                          },
+                          "src": "5364:24:26",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint64",
+                            "typeString": "uint64"
+                          }
+                        },
+                        "id": 4603,
+                        "nodeType": "ExpressionStatement",
+                        "src": "5364:24:26"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "assignments": [
+                    4607
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 4607,
+                      "mutability": "mutable",
+                      "name": "i",
+                      "nameLocation": "5416:1:26",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 4647,
+                      "src": "5409:8:26",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      },
+                      "typeName": {
+                        "id": 4606,
+                        "name": "uint64",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "5409:6:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint64",
+                          "typeString": "uint64"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 4608,
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "5409:8:26"
+                },
+                {
+                  "body": {
+                    "id": 4641,
+                    "nodeType": "Block",
+                    "src": "5505:168:26",
+                    "statements": [
+                      {
+                        "expression": {
+                          "id": 4629,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftHandSide": {
+                            "id": 4625,
+                            "name": "recoveryBlockNumber",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 4472,
+                            "src": "5519:19:26",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint64",
+                              "typeString": "uint64"
+                            }
+                          },
+                          "nodeType": "Assignment",
+                          "operator": "=",
+                          "rightHandSide": {
+                            "baseExpression": {
+                              "id": 4626,
+                              "name": "handleNoncesToBlockNums",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4476,
+                              "src": "5541:23:26",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_mapping$_t_uint64_$_t_uint64_$",
+                                "typeString": "mapping(uint64 => uint64)"
+                              }
+                            },
+                            "id": 4628,
+                            "indexExpression": {
+                              "id": 4627,
+                              "name": "i",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4607,
+                              "src": "5565:1:26",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint64",
+                                "typeString": "uint64"
+                              }
+                            },
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "nodeType": "IndexAccess",
+                            "src": "5541:26:26",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint64",
+                              "typeString": "uint64"
+                            }
+                          },
+                          "src": "5519:48:26",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint64",
+                            "typeString": "uint64"
+                          }
+                        },
+                        "id": 4630,
+                        "nodeType": "ExpressionStatement",
+                        "src": "5519:48:26"
+                      },
+                      {
+                        "expression": {
+                          "id": 4634,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "UnaryOperation",
+                          "operator": "delete",
+                          "prefix": true,
+                          "src": "5581:33:26",
+                          "subExpression": {
+                            "baseExpression": {
+                              "id": 4631,
+                              "name": "handleNoncesToBlockNums",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4476,
+                              "src": "5588:23:26",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_mapping$_t_uint64_$_t_uint64_$",
+                                "typeString": "mapping(uint64 => uint64)"
+                              }
+                            },
+                            "id": 4633,
+                            "indexExpression": {
+                              "id": 4632,
+                              "name": "i",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4607,
+                              "src": "5612:1:26",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint64",
+                                "typeString": "uint64"
+                              }
+                            },
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": true,
+                            "nodeType": "IndexAccess",
+                            "src": "5588:26:26",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint64",
+                              "typeString": "uint64"
+                            }
+                          },
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_tuple$__$",
+                            "typeString": "tuple()"
+                          }
+                        },
+                        "id": 4635,
+                        "nodeType": "ExpressionStatement",
+                        "src": "5581:33:26"
+                      },
+                      {
+                        "expression": {
+                          "id": 4639,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "UnaryOperation",
+                          "operator": "delete",
+                          "prefix": true,
+                          "src": "5628:34:26",
+                          "subExpression": {
+                            "baseExpression": {
+                              "id": 4636,
+                              "name": "closedValueTransferVotes",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 3703,
+                              "src": "5635:24:26",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_mapping$_t_uint64_$_t_bool_$",
+                                "typeString": "mapping(uint64 => bool)"
+                              }
+                            },
+                            "id": 4638,
+                            "indexExpression": {
+                              "id": 4637,
+                              "name": "i",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4607,
+                              "src": "5660:1:26",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint64",
+                                "typeString": "uint64"
+                              }
+                            },
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": true,
+                            "nodeType": "IndexAccess",
+                            "src": "5635:27:26",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bool",
+                              "typeString": "bool"
+                            }
+                          },
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_tuple$__$",
+                            "typeString": "tuple()"
+                          }
+                        },
+                        "id": 4640,
+                        "nodeType": "ExpressionStatement",
+                        "src": "5628:34:26"
+                      }
+                    ]
+                  },
+                  "condition": {
+                    "commonType": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "id": 4621,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "commonType": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      },
+                      "id": 4615,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "id": 4613,
+                        "name": "i",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4607,
+                        "src": "5454:1:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint64",
+                          "typeString": "uint64"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": "<=",
+                      "rightExpression": {
+                        "id": 4614,
+                        "name": "limit",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4592,
+                        "src": "5459:5:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint64",
+                          "typeString": "uint64"
+                        }
+                      },
+                      "src": "5454:10:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "&&",
+                    "rightExpression": {
+                      "commonType": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      },
+                      "id": 4620,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "baseExpression": {
+                          "id": 4616,
+                          "name": "handleNoncesToBlockNums",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 4476,
+                          "src": "5468:23:26",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_uint64_$_t_uint64_$",
+                            "typeString": "mapping(uint64 => uint64)"
+                          }
+                        },
+                        "id": 4618,
+                        "indexExpression": {
+                          "id": 4617,
+                          "name": "i",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 4607,
+                          "src": "5492:1:26",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint64",
+                            "typeString": "uint64"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "5468:26:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint64",
+                          "typeString": "uint64"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": ">",
+                      "rightExpression": {
+                        "hexValue": "30",
+                        "id": 4619,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "number",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "5497:1:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_rational_0_by_1",
+                          "typeString": "int_const 0"
+                        },
+                        "value": "0"
+                      },
+                      "src": "5468:30:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "src": "5454:44:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 4642,
+                  "initializationExpression": {
+                    "expression": {
+                      "id": 4611,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftHandSide": {
+                        "id": 4609,
+                        "name": "i",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4607,
+                        "src": "5432:1:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint64",
+                          "typeString": "uint64"
+                        }
+                      },
+                      "nodeType": "Assignment",
+                      "operator": "=",
+                      "rightHandSide": {
+                        "id": 4610,
+                        "name": "lowerHandleNonce",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4467,
+                        "src": "5436:16:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint64",
+                          "typeString": "uint64"
+                        }
+                      },
+                      "src": "5432:20:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      }
+                    },
+                    "id": 4612,
+                    "nodeType": "ExpressionStatement",
+                    "src": "5432:20:26"
+                  },
+                  "loopExpression": {
+                    "expression": {
+                      "id": 4623,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "UnaryOperation",
+                      "operator": "++",
+                      "prefix": false,
+                      "src": "5500:3:26",
+                      "subExpression": {
+                        "id": 4622,
+                        "name": "i",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4607,
+                        "src": "5500:1:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint64",
+                          "typeString": "uint64"
+                        }
+                      },
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      }
+                    },
+                    "id": 4624,
+                    "nodeType": "ExpressionStatement",
+                    "src": "5500:3:26"
+                  },
+                  "nodeType": "ForStatement",
+                  "src": "5427:246:26"
+                },
+                {
+                  "expression": {
+                    "id": 4645,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 4643,
+                      "name": "lowerHandleNonce",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4467,
+                      "src": "5682:16:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "id": 4644,
+                      "name": "i",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4607,
+                      "src": "5701:1:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      }
+                    },
+                    "src": "5682:20:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "id": 4646,
+                  "nodeType": "ExpressionStatement",
+                  "src": "5682:20:26"
+                }
+              ]
+            },
+            "id": 4648,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_updateHandleNonce",
+            "nameLocation": "5102:18:26",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4580,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4579,
+                  "mutability": "mutable",
+                  "name": "_requestedNonce",
+                  "nameLocation": "5128:15:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4648,
+                  "src": "5121:22:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 4578,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5121:6:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "5120:24:26"
+            },
+            "returnParameters": {
+              "id": 4581,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "5154:0:26"
+            },
+            "scope": 4674,
+            "src": "5093:616:26",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 4660,
+              "nodeType": "Block",
+              "src": "5785:77:26",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_uint64",
+                          "typeString": "uint64"
+                        },
+                        "id": 4656,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "id": 4654,
+                          "name": "lowerHandleNonce",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 4467,
+                          "src": "5803:16:26",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint64",
+                            "typeString": "uint64"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "<=",
+                        "rightExpression": {
+                          "id": 4655,
+                          "name": "_requestedNonce",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 4650,
+                          "src": "5823:15:26",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint64",
+                            "typeString": "uint64"
+                          }
+                        },
+                        "src": "5803:35:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "72656d6f76656420766f7465",
+                        "id": 4657,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "5840:14:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_d61bef930e6c4b6b11e2d60cfe12b81f0e780c18b8cf5372bf84742a92ad3929",
+                          "typeString": "literal_string \"removed vote\""
+                        },
+                        "value": "removed vote"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_d61bef930e6c4b6b11e2d60cfe12b81f0e780c18b8cf5372bf84742a92ad3929",
+                          "typeString": "literal_string \"removed vote\""
+                        }
+                      ],
+                      "id": 4653,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        4294967278,
+                        4294967278
+                      ],
+                      "referencedDeclaration": 4294967278,
+                      "src": "5795:7:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 4658,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "5795:60:26",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 4659,
+                  "nodeType": "ExpressionStatement",
+                  "src": "5795:60:26"
+                }
+              ]
+            },
+            "id": 4661,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_lowerHandleNonceCheck",
+            "nameLocation": "5724:22:26",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4651,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4650,
+                  "mutability": "mutable",
+                  "name": "_requestedNonce",
+                  "nameLocation": "5754:15:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4661,
+                  "src": "5747:22:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 4649,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5747:6:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "5746:24:26"
+            },
+            "returnParameters": {
+              "id": 4652,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "5785:0:26"
+            },
+            "scope": 4674,
+            "src": "5715:147:26",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 4672,
+              "nodeType": "Block",
+              "src": "6003:46:26",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 4669,
+                        "name": "_feeReceiver",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4663,
+                        "src": "6029:12:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      ],
+                      "id": 4668,
+                      "name": "_setFeeReceiver",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 3651,
+                      "src": "6013:15:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_address_payable_$returns$__$",
+                        "typeString": "function (address payable)"
+                      }
+                    },
+                    "id": 4670,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "6013:29:26",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 4671,
+                  "nodeType": "ExpressionStatement",
+                  "src": "6013:29:26"
+                }
+              ]
+            },
+            "functionSelector": "efdcd974",
+            "id": 4673,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "id": 4666,
+                "kind": "modifierInvocation",
+                "modifierName": {
+                  "id": 4665,
+                  "name": "onlyOwner",
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 439,
+                  "src": "5989:9:26"
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "5989:9:26"
+              }
+            ],
+            "name": "setFeeReceiver",
+            "nameLocation": "5919:14:26",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4664,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4663,
+                  "mutability": "mutable",
+                  "name": "_feeReceiver",
+                  "nameLocation": "5950:12:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4673,
+                  "src": "5934:28:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  },
+                  "typeName": {
+                    "id": 4662,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5934:15:26",
+                    "stateMutability": "payable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "5933:30:26"
+            },
+            "returnParameters": {
+              "id": 4667,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "6003:0:26"
+            },
+            "scope": 4674,
+            "src": "5910:139:26",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 4675,
+        "src": "951:5100:26",
+        "usedErrors": []
+      }
+    ],
+    "src": "801:5251:26"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.14+commit.80d49f37.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.7",
+  "updatedAt": "2022-06-15T12:34:59.478Z",
+  "devdoc": {
+    "events": {
+      "HandleValueTransfer(bytes32,uint8,address,address,address,uint256,uint64,uint64,bytes)": {
+        "params": {
+          "extraData": "is additional data for specific purpose of a service provider.",
+          "from": "is an address of the account who requested the value transfer.",
+          "handleNonce": "is the order number of the handle value transfer.",
+          "requestTxHash": "is a transaction hash of request value transfer.",
+          "to": "is an address of the account who will received the value.",
+          "tokenAddress": "Address of token contract the token belong to.",
+          "tokenType": "is the type of tokens (KLAY/ERC20/ERC721).",
+          "valueOrTokenId": "is the value of KLAY/ERC20 or token ID of ERC721."
+        }
+      },
+      "RequestValueTransfer(uint8,address,address,address,uint256,uint64,uint256,bytes)": {
+        "params": {
+          "extraData": "is additional data for specific purpose of a service provider.",
+          "fee": "is fee of value transfer.",
+          "from": "is the requester of the request value transfer event.",
+          "requestNonce": "is the order number of the request value transfer.",
+          "to": "is the receiver of the value.",
+          "tokenAddress": "Address of token contract the token belong to.",
+          "tokenType": "is the type of tokens (KLAY/ERC20/ERC721).",
+          "valueOrTokenId": "is the value of KLAY/ERC20 or token ID of ERC721."
+        }
+      },
+      "RequestValueTransferEncoded(uint8,address,address,address,uint256,uint64,uint256,bytes,uint8,bytes)": {
+        "params": {
+          "encodedData": "is a packed set of values.",
+          "encodingVer": "indicates encodedData version.",
+          "extraData": "is additional data for specific purpose of a service provider.",
+          "fee": "is fee of value transfer.",
+          "from": "is the requester of the request value transfer event.",
+          "requestNonce": "is the order number of the request value transfer.",
+          "to": "is the receiver of the value.",
+          "tokenAddress": "Address of token contract the token belong to.",
+          "tokenType": "is the type of tokens (KLAY/ERC20/ERC721).",
+          "valueOrTokenId": "is the value of KLAY/ERC20 or token ID of ERC721."
+        }
+      }
+    },
+    "kind": "dev",
+    "methods": {
+      "owner()": {
+        "details": "Returns the address of the current owner."
+      },
+      "renounceOwnership()": {
+        "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
+      },
+      "transferOwnership(address)": {
+        "details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "events": {
+      "HandleValueTransfer(bytes32,uint8,address,address,address,uint256,uint64,uint64,bytes)": {
+        "notice": "Event to log the handle value transfer from the Bridge."
+      },
+      "RequestValueTransfer(uint8,address,address,address,uint256,uint64,uint256,bytes)": {
+        "notice": "Event to log the request value transfer from the Bridge."
+      },
+      "RequestValueTransferEncoded(uint8,address,address,address,uint256,uint64,uint256,bytes,uint8,bytes)": {
+        "notice": "Event to log the request value transfer from the Bridge."
+      }
+    },
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

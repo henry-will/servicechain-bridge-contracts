@@ -4,62 +4,57 @@
 package kip13
 
 import (
-	"errors"
 	"math/big"
 	"strings"
 
-	ethereum "github.com/ethereum/go-ethereum"
-	"github.com/ethereum/go-ethereum/accounts/abi"
-	"github.com/ethereum/go-ethereum/accounts/abi/bind"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/event"
+	"github.com/klaytn/klaytn"
+	"github.com/klaytn/klaytn/accounts/abi"
+	"github.com/klaytn/klaytn/accounts/abi/bind"
+	"github.com/klaytn/klaytn/blockchain/types"
+	"github.com/klaytn/klaytn/common"
+	"github.com/klaytn/klaytn/event"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
 var (
-	_ = errors.New
 	_ = big.NewInt
 	_ = strings.NewReader
-	_ = ethereum.NotFound
+	_ = klaytn.NotFound
 	_ = bind.Bind
 	_ = common.Big1
 	_ = types.BloomLookup
 	_ = event.NewSubscription
 )
 
-// Kip13MetaData contains all meta data concerning the Kip13 contract.
-var Kip13MetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceID\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]",
-}
-
 // Kip13ABI is the input ABI used to generate the binding from.
-// Deprecated: Use Kip13MetaData.ABI instead.
-var Kip13ABI = Kip13MetaData.ABI
+const Kip13ABI = "[{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceID\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]"
 
-// Kip13 is an auto generated Go binding around an Ethereum contract.
+// Kip13BinRuntime is the compiled bytecode used for adding genesis block without deploying code.
+const Kip13BinRuntime = ``
+
+// Kip13 is an auto generated Go binding around a Klaytn contract.
 type Kip13 struct {
 	Kip13Caller     // Read-only binding to the contract
 	Kip13Transactor // Write-only binding to the contract
 	Kip13Filterer   // Log filterer for contract events
 }
 
-// Kip13Caller is an auto generated read-only Go binding around an Ethereum contract.
+// Kip13Caller is an auto generated read-only Go binding around a Klaytn contract.
 type Kip13Caller struct {
 	contract *bind.BoundContract // Generic contract wrapper for the low level calls
 }
 
-// Kip13Transactor is an auto generated write-only Go binding around an Ethereum contract.
+// Kip13Transactor is an auto generated write-only Go binding around a Klaytn contract.
 type Kip13Transactor struct {
 	contract *bind.BoundContract // Generic contract wrapper for the low level calls
 }
 
-// Kip13Filterer is an auto generated log filtering Go binding around an Ethereum contract events.
+// Kip13Filterer is an auto generated log filtering Go binding around a Klaytn contract events.
 type Kip13Filterer struct {
 	contract *bind.BoundContract // Generic contract wrapper for the low level calls
 }
 
-// Kip13Session is an auto generated Go binding around an Ethereum contract,
+// Kip13Session is an auto generated Go binding around a Klaytn contract,
 // with pre-set call and transact options.
 type Kip13Session struct {
 	Contract     *Kip13            // Generic contract binding to set the session for
@@ -67,31 +62,31 @@ type Kip13Session struct {
 	TransactOpts bind.TransactOpts // Transaction auth options to use throughout this session
 }
 
-// Kip13CallerSession is an auto generated read-only Go binding around an Ethereum contract,
+// Kip13CallerSession is an auto generated read-only Go binding around a Klaytn contract,
 // with pre-set call options.
 type Kip13CallerSession struct {
 	Contract *Kip13Caller  // Generic contract caller binding to set the session for
 	CallOpts bind.CallOpts // Call options to use throughout this session
 }
 
-// Kip13TransactorSession is an auto generated write-only Go binding around an Ethereum contract,
+// Kip13TransactorSession is an auto generated write-only Go binding around a Klaytn contract,
 // with pre-set transact options.
 type Kip13TransactorSession struct {
 	Contract     *Kip13Transactor  // Generic contract transactor binding to set the session for
 	TransactOpts bind.TransactOpts // Transaction auth options to use throughout this session
 }
 
-// Kip13Raw is an auto generated low-level Go binding around an Ethereum contract.
+// Kip13Raw is an auto generated low-level Go binding around a Klaytn contract.
 type Kip13Raw struct {
 	Contract *Kip13 // Generic contract binding to access the raw methods on
 }
 
-// Kip13CallerRaw is an auto generated low-level read-only Go binding around an Ethereum contract.
+// Kip13CallerRaw is an auto generated low-level read-only Go binding around a Klaytn contract.
 type Kip13CallerRaw struct {
 	Contract *Kip13Caller // Generic read-only contract binding to access the raw methods on
 }
 
-// Kip13TransactorRaw is an auto generated low-level write-only Go binding around an Ethereum contract.
+// Kip13TransactorRaw is an auto generated low-level write-only Go binding around a Klaytn contract.
 type Kip13TransactorRaw struct {
 	Contract *Kip13Transactor // Generic write-only contract binding to access the raw methods on
 }
@@ -145,7 +140,7 @@ func bindKip13(address common.Address, caller bind.ContractCaller, transactor bi
 // sets the output to result. The result type might be a single field for simple
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
-func (_Kip13 *Kip13Raw) Call(opts *bind.CallOpts, result *[]interface{}, method string, params ...interface{}) error {
+func (_Kip13 *Kip13Raw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
 	return _Kip13.Contract.Kip13Caller.contract.Call(opts, result, method, params...)
 }
 
@@ -164,7 +159,7 @@ func (_Kip13 *Kip13Raw) Transact(opts *bind.TransactOpts, method string, params 
 // sets the output to result. The result type might be a single field for simple
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
-func (_Kip13 *Kip13CallerRaw) Call(opts *bind.CallOpts, result *[]interface{}, method string, params ...interface{}) error {
+func (_Kip13 *Kip13CallerRaw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
 	return _Kip13.Contract.contract.Call(opts, result, method, params...)
 }
 
@@ -183,17 +178,12 @@ func (_Kip13 *Kip13TransactorRaw) Transact(opts *bind.TransactOpts, method strin
 //
 // Solidity: function supportsInterface(bytes4 interfaceID) view returns(bool)
 func (_Kip13 *Kip13Caller) SupportsInterface(opts *bind.CallOpts, interfaceID [4]byte) (bool, error) {
-	var out []interface{}
-	err := _Kip13.contract.Call(opts, &out, "supportsInterface", interfaceID)
-
-	if err != nil {
-		return *new(bool), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
-
-	return out0, err
-
+	var (
+		ret0 = new(bool)
+	)
+	out := ret0
+	err := _Kip13.contract.Call(opts, out, "supportsInterface", interfaceID)
+	return *ret0, err
 }
 
 // SupportsInterface is a free data retrieval call binding the contract method 0x01ffc9a7.

@@ -1,0 +1,10 @@
+{
+  "name": "servicechain-bridge-contracts",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "@chainsafe/truffle-plugin-abigen": "^0.0.2",
+    "@klaytn/contracts": "1.0.2",
+    "truffle": "^5.5.18"
+  }
+}

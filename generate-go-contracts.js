@@ -8,7 +8,31 @@ const GENERATE = [
         name: "InterfaceIdentifier",
         pkg: "kip13",
         directory: "contracts/kips/kip13",
-        go_file: "InterfaceIdentifier.go",
+        go_file: "interface_identifier.go",
+    },
+    {
+        name: "Bridge",
+        pkg: "bridge",
+        directory: "contracts/sc/bridge",
+        go_file: "bridge.go",
+    },
+    {
+        name: "ExtBridge",
+        pkg: "extbridge",
+        directory: "contracts/sc/bridge/extend",
+        go_file: "ext_bridge.go",
+    },
+    {
+        name: "ServiceChainNFT",
+        pkg: "scnft",
+        directory: "contracts/sc/tokens/erc721",
+        go_file: "servicechain_nft.go",
+    },
+    {
+        name: "ServiceChainToken",
+        pkg: "sctoken",
+        directory: "contracts/sc/tokens/erc20",
+        go_file: "servicechain_token.go",
     },
 ];
 
@@ -24,8 +48,8 @@ const GEN_FILE_DIR = `go-contracts`;
         const abi = `--abi=abigenBindings/abi/${gen.name}.abi`;
         const pkg = `--pkg=${gen.pkg}`;
         const go_code = `--out=${GEN_FILE_DIR}/${gen.directory}/${gen.go_file}`;
-        const args = [bin, abi, pkg, go_code];
+        const args = [abi, bin, pkg, go_code];
         console.log(args);
-        await execFile("abigen", args);
+        await execFile("./bin/abigen-v1.9.0", args);
     }
 })();

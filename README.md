@@ -37,6 +37,14 @@ $ yarn truffle run abigen
 ```
 
 ## Create Go code from solidity bytecode
+### use klaytn abigen
+Build abigen
+```shell
+$ git clone https://github.com/klaytn/klaytn.git
+$ make abigen
+$ cp ${klaytn git clone home}/build/bin/abigen ${servicechain-bridge-contracts git clone home}/bin/abigen-${klaytn version}
+ex) cp ./build/bin/abigen ../servicechain-bridge-contracts/bin/abi-v1.9.0
+```
 ### Create the Go binding with bytecode
 ```
 $ node generate-go-contracts.js

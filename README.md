@@ -1,3 +1,13 @@
+# This is a ServiceChain bridge
+It is for making servicechain bridge and for generating go files for klaytn from bridge contract.
+### Versions used to build 
+- npm v12.22.10
+- truffle 5.5.18
+- solc 0.8.14+commit.80d49f37.Emscripten.clang 
+- klaytn abigen v1.8.4-464dcb16
+- klaytn 1.9.0
+- go 1.18.2
+
 ## The `Solidity` Tool
 
 ## Solc is available as a Homebrew package for macOS.

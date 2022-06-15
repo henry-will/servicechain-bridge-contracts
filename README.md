@@ -7,6 +7,14 @@ brew tap ethereum/ethereum
 brew install solidity
 ```
 
+## Install node modules
+- yarn add truffle
+- yarn add @chainsafe/truffle-plugin-abigen
+- yarn add @klaytn/contracts@1.0.2
+```shell
+yarn install
+```
+
 ## The `Truffle` Tool
 ### Compile the contract
 ```

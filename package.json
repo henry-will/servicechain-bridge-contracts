@@ -7,7 +7,6 @@
     "truffle-abigen": "truffle run abigen",
     "generate-go-files": "node generate-go-contracts.js"
   },
-
   "dependencies": {
     "@chainsafe/truffle-plugin-abigen": "^0.0.2",
     "@klaytn/contracts": "1.0.2",

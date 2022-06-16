@@ -17,12 +17,6 @@ const GENERATE = [
         go_file: "bridge.go",
     },
     {
-        name: "ExtBridge",
-        pkg: "extbridge",
-        directory: "contracts/sc/bridge/extend",
-        go_file: "ext_bridge.go",
-    },
-    {
         name: "ServiceChainNFT",
         pkg: "scnft",
         directory: "contracts/sc/tokens/erc721",
@@ -33,6 +27,18 @@ const GENERATE = [
         pkg: "sctoken",
         directory: "contracts/sc/tokens/erc20",
         go_file: "servicechain_token.go",
+    },
+    {
+        name: "ExtBridge",
+        pkg: "extbridge",
+        directory: "contracts/sc/bridge/extend",
+        go_file: "ext_bridge.go",
+    },
+    {
+        name: "Callback",
+        pkg: "callback",
+        directory: "contracts/sc/bridge/extend",
+        go_file: "callback.go",
     },
 ];
 

@@ -1,4 +1,4 @@
-module github.com/henry-will/servicechain-bridge-contracts/go/contracts
+module github.com/henry-will/servicechain-bridge-contracts
 
 go 1.18
 

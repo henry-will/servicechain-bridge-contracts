@@ -36,7 +36,7 @@ const GENERATE = [
     },
     {
         name: "Callback",
-        pkg: "callback",
+        pkg: "extbridge",
         directory: "contracts/sc/bridge/extend",
         go_file: "callback.go",
     },

@@ -36,7 +36,7 @@ const GENERATE = [
     },
 ];
 
-const GEN_FILE_DIR = `go-contracts`;
+const GEN_FILE_DIR = "go";
 
 (async () => {
     await execFile("rm", ["-rf", GEN_FILE_DIR]);

@@ -1,7 +1,7 @@
 // Code generated - DO NOT EDIT.
 // This file is a generated binding and any manual changes will be lost.
 
-package kip13
+package InterfaceIdentifier
 
 import (
 	"math/big"
@@ -26,110 +26,110 @@ var (
 	_ = event.NewSubscription
 )
 
-// Kip13ABI is the input ABI used to generate the binding from.
-const Kip13ABI = "[{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceID\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]"
+// InterfaceIdentifierABI is the input ABI used to generate the binding from.
+const InterfaceIdentifierABI = "[{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceID\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]"
 
-// Kip13BinRuntime is the compiled bytecode used for adding genesis block without deploying code.
-const Kip13BinRuntime = ``
+// InterfaceIdentifierBinRuntime is the compiled bytecode used for adding genesis block without deploying code.
+const InterfaceIdentifierBinRuntime = ``
 
-// Kip13 is an auto generated Go binding around a Klaytn contract.
-type Kip13 struct {
-	Kip13Caller     // Read-only binding to the contract
-	Kip13Transactor // Write-only binding to the contract
-	Kip13Filterer   // Log filterer for contract events
+// InterfaceIdentifier is an auto generated Go binding around a Klaytn contract.
+type InterfaceIdentifier struct {
+	InterfaceIdentifierCaller     // Read-only binding to the contract
+	InterfaceIdentifierTransactor // Write-only binding to the contract
+	InterfaceIdentifierFilterer   // Log filterer for contract events
 }
 
-// Kip13Caller is an auto generated read-only Go binding around a Klaytn contract.
-type Kip13Caller struct {
+// InterfaceIdentifierCaller is an auto generated read-only Go binding around a Klaytn contract.
+type InterfaceIdentifierCaller struct {
 	contract *bind.BoundContract // Generic contract wrapper for the low level calls
 }
 
-// Kip13Transactor is an auto generated write-only Go binding around a Klaytn contract.
-type Kip13Transactor struct {
+// InterfaceIdentifierTransactor is an auto generated write-only Go binding around a Klaytn contract.
+type InterfaceIdentifierTransactor struct {
 	contract *bind.BoundContract // Generic contract wrapper for the low level calls
 }
 
-// Kip13Filterer is an auto generated log filtering Go binding around a Klaytn contract events.
-type Kip13Filterer struct {
+// InterfaceIdentifierFilterer is an auto generated log filtering Go binding around a Klaytn contract events.
+type InterfaceIdentifierFilterer struct {
 	contract *bind.BoundContract // Generic contract wrapper for the low level calls
 }
 
-// Kip13Session is an auto generated Go binding around a Klaytn contract,
+// InterfaceIdentifierSession is an auto generated Go binding around a Klaytn contract,
 // with pre-set call and transact options.
-type Kip13Session struct {
-	Contract     *Kip13            // Generic contract binding to set the session for
-	CallOpts     bind.CallOpts     // Call options to use throughout this session
-	TransactOpts bind.TransactOpts // Transaction auth options to use throughout this session
+type InterfaceIdentifierSession struct {
+	Contract     *InterfaceIdentifier // Generic contract binding to set the session for
+	CallOpts     bind.CallOpts        // Call options to use throughout this session
+	TransactOpts bind.TransactOpts    // Transaction auth options to use throughout this session
 }
 
-// Kip13CallerSession is an auto generated read-only Go binding around a Klaytn contract,
+// InterfaceIdentifierCallerSession is an auto generated read-only Go binding around a Klaytn contract,
 // with pre-set call options.
-type Kip13CallerSession struct {
-	Contract *Kip13Caller  // Generic contract caller binding to set the session for
-	CallOpts bind.CallOpts // Call options to use throughout this session
+type InterfaceIdentifierCallerSession struct {
+	Contract *InterfaceIdentifierCaller // Generic contract caller binding to set the session for
+	CallOpts bind.CallOpts              // Call options to use throughout this session
 }
 
-// Kip13TransactorSession is an auto generated write-only Go binding around a Klaytn contract,
+// InterfaceIdentifierTransactorSession is an auto generated write-only Go binding around a Klaytn contract,
 // with pre-set transact options.
-type Kip13TransactorSession struct {
-	Contract     *Kip13Transactor  // Generic contract transactor binding to set the session for
-	TransactOpts bind.TransactOpts // Transaction auth options to use throughout this session
+type InterfaceIdentifierTransactorSession struct {
+	Contract     *InterfaceIdentifierTransactor // Generic contract transactor binding to set the session for
+	TransactOpts bind.TransactOpts              // Transaction auth options to use throughout this session
 }
 
-// Kip13Raw is an auto generated low-level Go binding around a Klaytn contract.
-type Kip13Raw struct {
-	Contract *Kip13 // Generic contract binding to access the raw methods on
+// InterfaceIdentifierRaw is an auto generated low-level Go binding around a Klaytn contract.
+type InterfaceIdentifierRaw struct {
+	Contract *InterfaceIdentifier // Generic contract binding to access the raw methods on
 }
 
-// Kip13CallerRaw is an auto generated low-level read-only Go binding around a Klaytn contract.
-type Kip13CallerRaw struct {
-	Contract *Kip13Caller // Generic read-only contract binding to access the raw methods on
+// InterfaceIdentifierCallerRaw is an auto generated low-level read-only Go binding around a Klaytn contract.
+type InterfaceIdentifierCallerRaw struct {
+	Contract *InterfaceIdentifierCaller // Generic read-only contract binding to access the raw methods on
 }
 
-// Kip13TransactorRaw is an auto generated low-level write-only Go binding around a Klaytn contract.
-type Kip13TransactorRaw struct {
-	Contract *Kip13Transactor // Generic write-only contract binding to access the raw methods on
+// InterfaceIdentifierTransactorRaw is an auto generated low-level write-only Go binding around a Klaytn contract.
+type InterfaceIdentifierTransactorRaw struct {
+	Contract *InterfaceIdentifierTransactor // Generic write-only contract binding to access the raw methods on
 }
 
-// NewKip13 creates a new instance of Kip13, bound to a specific deployed contract.
-func NewKip13(address common.Address, backend bind.ContractBackend) (*Kip13, error) {
-	contract, err := bindKip13(address, backend, backend, backend)
+// NewInterfaceIdentifier creates a new instance of InterfaceIdentifier, bound to a specific deployed contract.
+func NewInterfaceIdentifier(address common.Address, backend bind.ContractBackend) (*InterfaceIdentifier, error) {
+	contract, err := bindInterfaceIdentifier(address, backend, backend, backend)
 	if err != nil {
 		return nil, err
 	}
-	return &Kip13{Kip13Caller: Kip13Caller{contract: contract}, Kip13Transactor: Kip13Transactor{contract: contract}, Kip13Filterer: Kip13Filterer{contract: contract}}, nil
+	return &InterfaceIdentifier{InterfaceIdentifierCaller: InterfaceIdentifierCaller{contract: contract}, InterfaceIdentifierTransactor: InterfaceIdentifierTransactor{contract: contract}, InterfaceIdentifierFilterer: InterfaceIdentifierFilterer{contract: contract}}, nil
 }
 
-// NewKip13Caller creates a new read-only instance of Kip13, bound to a specific deployed contract.
-func NewKip13Caller(address common.Address, caller bind.ContractCaller) (*Kip13Caller, error) {
-	contract, err := bindKip13(address, caller, nil, nil)
+// NewInterfaceIdentifierCaller creates a new read-only instance of InterfaceIdentifier, bound to a specific deployed contract.
+func NewInterfaceIdentifierCaller(address common.Address, caller bind.ContractCaller) (*InterfaceIdentifierCaller, error) {
+	contract, err := bindInterfaceIdentifier(address, caller, nil, nil)
 	if err != nil {
 		return nil, err
 	}
-	return &Kip13Caller{contract: contract}, nil
+	return &InterfaceIdentifierCaller{contract: contract}, nil
 }
 
-// NewKip13Transactor creates a new write-only instance of Kip13, bound to a specific deployed contract.
-func NewKip13Transactor(address common.Address, transactor bind.ContractTransactor) (*Kip13Transactor, error) {
-	contract, err := bindKip13(address, nil, transactor, nil)
+// NewInterfaceIdentifierTransactor creates a new write-only instance of InterfaceIdentifier, bound to a specific deployed contract.
+func NewInterfaceIdentifierTransactor(address common.Address, transactor bind.ContractTransactor) (*InterfaceIdentifierTransactor, error) {
+	contract, err := bindInterfaceIdentifier(address, nil, transactor, nil)
 	if err != nil {
 		return nil, err
 	}
-	return &Kip13Transactor{contract: contract}, nil
+	return &InterfaceIdentifierTransactor{contract: contract}, nil
 }
 
-// NewKip13Filterer creates a new log filterer instance of Kip13, bound to a specific deployed contract.
-func NewKip13Filterer(address common.Address, filterer bind.ContractFilterer) (*Kip13Filterer, error) {
-	contract, err := bindKip13(address, nil, nil, filterer)
+// NewInterfaceIdentifierFilterer creates a new log filterer instance of InterfaceIdentifier, bound to a specific deployed contract.
+func NewInterfaceIdentifierFilterer(address common.Address, filterer bind.ContractFilterer) (*InterfaceIdentifierFilterer, error) {
+	contract, err := bindInterfaceIdentifier(address, nil, nil, filterer)
 	if err != nil {
 		return nil, err
 	}
-	return &Kip13Filterer{contract: contract}, nil
+	return &InterfaceIdentifierFilterer{contract: contract}, nil
 }
 
-// bindKip13 binds a generic wrapper to an already deployed contract.
-func bindKip13(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
-	parsed, err := abi.JSON(strings.NewReader(Kip13ABI))
+// bindInterfaceIdentifier binds a generic wrapper to an already deployed contract.
+func bindInterfaceIdentifier(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
+	parsed, err := abi.JSON(strings.NewReader(InterfaceIdentifierABI))
 	if err != nil {
 		return nil, err
 	}
@@ -140,62 +140,62 @@ func bindKip13(address common.Address, caller bind.ContractCaller, transactor bi
 // sets the output to result. The result type might be a single field for simple
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
-func (_Kip13 *Kip13Raw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
-	return _Kip13.Contract.Kip13Caller.contract.Call(opts, result, method, params...)
+func (_InterfaceIdentifier *InterfaceIdentifierRaw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
+	return _InterfaceIdentifier.Contract.InterfaceIdentifierCaller.contract.Call(opts, result, method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
 // its default method if one is available.
-func (_Kip13 *Kip13Raw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _Kip13.Contract.Kip13Transactor.contract.Transfer(opts)
+func (_InterfaceIdentifier *InterfaceIdentifierRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _InterfaceIdentifier.Contract.InterfaceIdentifierTransactor.contract.Transfer(opts)
 }
 
 // Transact invokes the (paid) contract method with params as input values.
-func (_Kip13 *Kip13Raw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
-	return _Kip13.Contract.Kip13Transactor.contract.Transact(opts, method, params...)
+func (_InterfaceIdentifier *InterfaceIdentifierRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
+	return _InterfaceIdentifier.Contract.InterfaceIdentifierTransactor.contract.Transact(opts, method, params...)
 }
 
 // Call invokes the (constant) contract method with params as input values and
 // sets the output to result. The result type might be a single field for simple
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
-func (_Kip13 *Kip13CallerRaw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
-	return _Kip13.Contract.contract.Call(opts, result, method, params...)
+func (_InterfaceIdentifier *InterfaceIdentifierCallerRaw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
+	return _InterfaceIdentifier.Contract.contract.Call(opts, result, method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
 // its default method if one is available.
-func (_Kip13 *Kip13TransactorRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _Kip13.Contract.contract.Transfer(opts)
+func (_InterfaceIdentifier *InterfaceIdentifierTransactorRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _InterfaceIdentifier.Contract.contract.Transfer(opts)
 }
 
 // Transact invokes the (paid) contract method with params as input values.
-func (_Kip13 *Kip13TransactorRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
-	return _Kip13.Contract.contract.Transact(opts, method, params...)
+func (_InterfaceIdentifier *InterfaceIdentifierTransactorRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
+	return _InterfaceIdentifier.Contract.contract.Transact(opts, method, params...)
 }
 
 // SupportsInterface is a free data retrieval call binding the contract method 0x01ffc9a7.
 //
 // Solidity: function supportsInterface(bytes4 interfaceID) view returns(bool)
-func (_Kip13 *Kip13Caller) SupportsInterface(opts *bind.CallOpts, interfaceID [4]byte) (bool, error) {
+func (_InterfaceIdentifier *InterfaceIdentifierCaller) SupportsInterface(opts *bind.CallOpts, interfaceID [4]byte) (bool, error) {
 	var (
 		ret0 = new(bool)
 	)
 	out := ret0
-	err := _Kip13.contract.Call(opts, out, "supportsInterface", interfaceID)
+	err := _InterfaceIdentifier.contract.Call(opts, out, "supportsInterface", interfaceID)
 	return *ret0, err
 }
 
 // SupportsInterface is a free data retrieval call binding the contract method 0x01ffc9a7.
 //
 // Solidity: function supportsInterface(bytes4 interfaceID) view returns(bool)
-func (_Kip13 *Kip13Session) SupportsInterface(interfaceID [4]byte) (bool, error) {
-	return _Kip13.Contract.SupportsInterface(&_Kip13.CallOpts, interfaceID)
+func (_InterfaceIdentifier *InterfaceIdentifierSession) SupportsInterface(interfaceID [4]byte) (bool, error) {
+	return _InterfaceIdentifier.Contract.SupportsInterface(&_InterfaceIdentifier.CallOpts, interfaceID)
 }
 
 // SupportsInterface is a free data retrieval call binding the contract method 0x01ffc9a7.
 //
 // Solidity: function supportsInterface(bytes4 interfaceID) view returns(bool)
-func (_Kip13 *Kip13CallerSession) SupportsInterface(interfaceID [4]byte) (bool, error) {
-	return _Kip13.Contract.SupportsInterface(&_Kip13.CallOpts, interfaceID)
+func (_InterfaceIdentifier *InterfaceIdentifierCallerSession) SupportsInterface(interfaceID [4]byte) (bool, error) {
+	return _InterfaceIdentifier.Contract.SupportsInterface(&_InterfaceIdentifier.CallOpts, interfaceID)
 }

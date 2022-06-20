@@ -10,8 +10,6 @@
   "dependencies": {
     "@chainsafe/truffle-plugin-abigen": "^0.0.2",
     "@klaytn/contracts": "1.0.2",
-    "@truffle/config": "^1.3.29",
-    "@truffle/workflow-compile": "^4.0.21",
     "truffle": "^5.5.18"
   }
 }

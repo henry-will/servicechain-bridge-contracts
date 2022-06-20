@@ -48,7 +48,18 @@ ex) cp ./build/bin/abigen ../servicechain-bridge-contracts/bin/abi-v1.9.0
 ```
 ### Create the Go binding with bytecode
 ```
-$ node generate-go-contracts.js
+$ node go-bindings.js
 ```
 
 ### package for klaytn projects
+- go.mod in klaytn
+```
+require ( 
+  github.com/henry-will/servicechain-bridge-contracts v0.9.7
+)
+
+```
+import  servicechain-bridge-contracts
+```go
+import "github.com/klaytn/servicechain-bridge-contracts/scnft"
+```

@@ -18,9 +18,9 @@
 
 pragma solidity ^0.8.0;
 
-import "@klaytn/contracts/token/ERC721/ERC721.sol";
-import "@klaytn/contracts/access/Ownable.sol";
-import "@klaytn/contracts/utils/Address.sol";
+import "../../../../node_modules/@klaytn/contracts/token/ERC721/ERC721.sol";
+import "../../../../node_modules/@klaytn/contracts/access/Ownable.sol";
+import "../../../../node_modules/@klaytn/contracts/utils/Address.sol";
 import "../../bridge/interface/IERC721BridgeReceiver.sol";
 
 /**

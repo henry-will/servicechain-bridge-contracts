@@ -1,44 +1,34 @@
 #!/usr/bin/env node
 
 const util = require("util");
+const fs = require("fs").promises;
+const path = require("path");
 const execFile = util.promisify(require("child_process").execFile);
 
 const GENERATE = [
     {
-        name: "InterfaceIdentifier",
-        pkg: "InterfaceIdentifier",
-        directory: "contracts/kips/kip13",
-        go_file: "interface_identifier.go",
+        pkg: "kip13",
+        directory: "kips/kip13",
     },
     {
-        name: "Bridge",
         pkg: "bridge",
-        directory: "contracts/sc/bridge",
-        go_file: "bridge.go",
+        directory: "sc/bridge",
     },
     {
-        name: "ServiceChainNFT",
+        pkg: "bridge",
+        directory: "sc/bridge/interface",
+    },
+    {
+        pkg: "extbridge",
+        directory: "sc/bridge/extend",
+    },
+    {
         pkg: "scnft",
-        directory: "contracts/sc/tokens/erc721",
-        go_file: "servicechain_nft.go",
+        directory: "sc/tokens/erc721",
     },
     {
-        name: "ServiceChainToken",
         pkg: "sctoken",
-        directory: "contracts/sc/tokens/erc20",
-        go_file: "servicechain_token.go",
-    },
-    {
-        name: "ExtBridge",
-        pkg: "extbridge",
-        directory: "contracts/sc/bridge/extend",
-        go_file: "ext_bridge.go",
-    },
-    {
-        name: "Callback",
-        pkg: "extbridge",
-        directory: "contracts/sc/bridge/extend",
-        go_file: "callback.go",
+        directory: "sc/tokens/erc20",
     },
 ];
 
@@ -49,16 +39,28 @@ const GEN_FILE_DIR = "go";
     await execFile("mkdir", ["-p", GEN_FILE_DIR]);
 
     for (const gen of GENERATE) {
-        await execFile("mkdir", ["-p", `${GEN_FILE_DIR}/${gen.directory}`]);
-        const bin = `--bin=abigenBindings/bin/${gen.name}.bin`;
-        const abi = `--abi=abigenBindings/abi/${gen.name}.abi`;
-        const combined_json = `--abi=build/contracts/${gen.name}.json`;
-        const type = `--type=${gen.name}`;
+        await execFile("rm", ["-rf", "build"]);
+        await execFile("rm", ["-rf", "contracts"]);
+        await execFile("rm", ["-rf", "abigenBindings"]);
+        await execFile("mkdir", ["-p", `${GEN_FILE_DIR}/${gen.pkg}`]);
+        await execFile("mkdir", ["-p", `contracts`]);
+        await execFile("cp", ["-r", `contracts-src/${gen.directory}`, `contracts/${gen.pkg}`]);
 
-        const pkg = `--pkg=${gen.pkg}`;
-        const go_code = `--out=${GEN_FILE_DIR}/${gen.directory}/${gen.go_file}`;
-        const args = [combined_json, type, bin, abi, pkg, go_code];
-        console.log(args);
-        await execFile("./bin/abigen-v1.9.0", args);
+        await execFile("yarn", ["truffle", "compile"]);
+        await execFile("yarn", ["truffle", "run", "abigen"]);
+
+        const files = await fs.readdir("./abigenBindings/abi/");
+        for (const file of files) {
+            const filename = path.basename(file, path.extname(file))
+            const bin = `--bin=abigenBindings/bin/${filename}.bin`;
+            const abi = `--abi=abigenBindings/abi/${filename}.abi`;
+            const type = `--type=${filename}`;
+
+            const pkg = `--pkg=${gen.pkg}`;
+            const go_code = `--out=${GEN_FILE_DIR}/${gen.pkg}/${filename}.go`;
+            const args = [bin, abi, type, pkg, go_code];
+            console.log(args);
+            await execFile("./bin/abigen-v1.9.0", args);
+        }
     }
 })();

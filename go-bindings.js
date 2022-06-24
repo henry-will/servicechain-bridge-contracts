@@ -33,8 +33,12 @@ const BINDING_PKG = [
 
 (async () => {
     for (const bindingPKG of BINDING_PKG) {
-        fs.rmdirSync(bindingPKG.pkg, {recursive: true});
-        fs.mkdirSync(bindingPKG.pkg, {recursive: true});
+        try {
+            await execFile("rm", ["-rf", bindingPKG]);
+            fs.mkdirSync(bindingPKG.pkg, {recursive: true});
+        } catch (e) {
+            console.error(e);
+        }
 
         const sol = `--sol=${bindingPKG.directory}/${bindingPKG.name}.sol`;
 
